@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- Mirrored from marco-pivetta.com/lessphp-minify-integration-lesscss-development/?replytocom=67 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 27 Oct 2015 07:39:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8" />
+<title>LESS CSS Minify Integration through LessCSS and LessPHP | Yet Another Angry Web Developer</title>
+<link href="https://plus.google.com/105979819821705639500" rel="publisher"/>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="../wp-content/themes/marco-pivetta/style.css" />
+<link rel="pingback" href="../xmlrpc.php" />
+<link rel="shortcut icon" href="../wp-content/themes/marco-pivetta/images/marco-pivetta-ocramius.gif" type="image/x-icon" />
+
+<!-- All in One SEO Pack 2.2.7.1 by Michael Torbert of Semper Fi Web Design[68,166] -->
+<meta name="description"  content="A LESS CSS Minify Integration written using Minify and LessPHP to make CSS design easier and more fun! Check out the LessCSS Minify integration on GitHub!" />
+
+<meta name="keywords"  content="less css,minify,lessphp minify integration,lesscss minify,css,lesscss,php" />
+
+<link rel="canonical" href="index.html" />
+<!-- /all in one seo pack -->
+<link rel="alternate" type="application/rss+xml" title="Yet Another Angry Web Developer &raquo; Feed" href="../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Yet Another Angry Web Developer &raquo; Comments Feed" href="../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Yet Another Angry Web Developer &raquo; LessPHP Minify Integration for faster LessCSS development Comments Feed" href="feed/index.html" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/marco-pivetta.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.5"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery4a80.js?ver=1.11.2'></script>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min1576.js?ver=1.2.1'></script>
+<script type='text/javascript' src='../wp-content/themes/marco-pivetta/js/jquery.conflictd19b.js?ver=4.2.5'></script>
+<script type='text/javascript' src='../wp-content/themes/marco-pivetta/js/jquery.lavalampd19b.js?ver=4.2.5'></script>
+<script type='text/javascript' src='../wp-content/themes/marco-pivetta/js/jquery.easingd19b.js?ver=4.2.5'></script>
+<script type='text/javascript' src='../wp-content/themes/marco-pivetta/js/jquery.hoverintentd19b.js?ver=4.2.5'></script>
+<script type='text/javascript' src='../wp-content/themes/marco-pivetta/js/jquery.prettyphotod19b.js?ver=4.2.5'></script>
+<script type='text/javascript' src='../wp-content/themes/marco-pivetta/js/jquery.nivosliderd19b.js?ver=4.2.5'></script>
+<script type='text/javascript' src='../wp-content/themes/marco-pivetta/js/jquery.uid19b.js?ver=4.2.5'></script>
+<script type='text/javascript' src='../wp-content/themes/marco-pivetta/js/themed19b.js?ver=4.2.5'></script>
+<script type='text/javascript' src='../wp-content/plugins/google-analyticator/external-tracking.min109c.js?ver=6.4.9'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../xmlrpc0db0.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Google Releases new Webmaster Tools Features!' href='../google-releases-new-webmaster-tools-features-seo-tools-for-better-serp-results/index.html' />
+<link rel='next' title='PHP Security Exploit: MySQL as a Backdoor with Load Data Local Infile' href='../php-exploit-mysql-backdoor-with-load-data-local-infile/index.html' />
+<meta name="generator" content="WordPress 4.2.5" />
+<link rel='shortlink' href='../index6ffe.html?p=79' />
+<meta name='robots' content='noindex,follow' />
+<!-- Google Analytics Tracking by Google Analyticator 6.4.9: http://www.videousermanuals.com/google-analyticator/ -->
+<script type="text/javascript">window.google_analytics_uacct = "pub-7184694881355044";</script>
+<script type="text/javascript">
+    var analyticsFileTypes = [''];
+    var analyticsSnippet = 'enabled';
+    var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+  
+	_gaq.push(['_setAccount', 'UA-15310667-1']);
+    _gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+</head>
+
+<body class="single single-post postid-79 single-format-standard">
+<div id="access" role="navigation">
+	<div class="menu"><ul><li ><a href="../index.html">Home</a></li></ul></div>
+</div>
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="../index.html" title="Yet Another Angry Web Developer" rel="home">Yet Another Angry Web Developer</a>
+					</span>
+				</div>
+															</div><!-- #branding -->
+					</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="../google-releases-new-webmaster-tools-features-seo-tools-for-better-serp-results/index.html" rel="prev"><span class="meta-nav">&larr;</span> Google Releases new Webmaster Tools Features!</a></div>
+					<div class="nav-next"><a href="../php-exploit-mysql-backdoor-with-load-data-local-infile/index.html" rel="next">PHP Security Exploit: MySQL as a Backdoor with Load Data Local Infile <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-79" class="post-79 post type-post status-publish format-standard hentry category-css category-design category-development category-it category-less-css category-php category-startups-projects tag-css-2 tag-lesscss tag-minify tag-php-2">
+					<h1 class="entry-title">LessPHP Minify Integration for faster LessCSS development</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="index.html" title="00:28" rel="bookmark"><span class="entry-date">May 28, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="../author/ocramius/index.html" title="View all posts by ocramius">ocramius</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<div style="float: right; margin-left: 10px;"><a href="https://twitter.com/share" class="twitter-share-button" data-via="Ocramius" data-hashtags="css,lesscss,minify,php" data-count="vertical" data-url="index.html">Tweet</a></div>
+<p>Today I&#8217;ve been working on some addition to the <strong><a title="Minify Project on Google Code" rel="external nofollow" href="http://code.google.com/p/minify/" target="_blank">Minify Project</a></strong> to support <strong><a title="LESS CSS for faster CSS development" rel="external nofollow" href="http://lesscss.org/" target="_blank">LESS CSS </a></strong>integration throug <a title="LessPHP by Leafo" rel="external nofollow" href="http://leafo.net/lessphp/" target="_blank">LessPHP</a>.</p>
+<h2>Why do I need LESS CSS?</h2>
+<p>As you probably have noticed, your <strong>CSS files are becoming huge</strong>, especially when working on great projects, avoiding sprites, adding gradients, box-shadows, animations, keyframes, etc:</p>
+<p style="padding-left: 30px;">That&#8217;s where LESS CSS comes into play.<br />
+<strong>LESS CSS is</strong> just another way of writing CSS, <strong><span style="text-decoration: underline;">not</span></strong> that <strong><span style="text-decoration: underline;">repetitive</span></strong> and &#8220;LESS&#8221; confusing in big projects.</p>
+<p><span id="more-79"></span></p>
+<h2>Why do I need Minify?</h2>
+<p><strong>Minify</strong> is a <strong>great tool</strong> for CSS compression <strong>on complex design projects</strong>, where you have more designers and dozens of different widgets to be styled individually, but without making the website slow and unresponsive, <strong>keeping it fast</strong> and slick.</p>
+<h2>So what was missing?</h2>
+<p>I&#8217;ve been working with Minify JS and CSS for some years till now, but once I switched to LESS I decided to<strong> stop writing</strong> all my <strong>CSS by hand</strong>.<br />
+<strong>Repeating css rules</strong> and all those<strong> vendor-prefixes</strong> for properties made me mad<strong>!</strong> This brought me to the usage of the <strong><a title="LESS CSS for Mac OSX" rel="external nofollow" href="http://incident57.com/less/" target="_blank">Less App for Mac OS</a></strong>, but also forced me to repeat a painful <strong>compile/redeploy procedure</strong> every time, most of the times automated with complex scripts that made the procedure even more <strong>confusing for my design team</strong>.</p>
+<p><strong>Minify</strong> was <strong>not able to</strong> pack and <strong>manage my LESS </strong>CSS files.</p>
+<p>&nbsp;</p>
+<h2>So what does this Minify LessPHP/LessCSS integration do?</h2>
+<p>I didn&#8217;t even believe I could make it in such a short time, just a bit of planning an an hour of coding+debugging, but now I have a working <strong>Minify</strong> instance<strong> using &#8220;.less&#8221; files and automagically </strong>compiling through LessPHP and <strong>minifying them</strong>.</p>
+<p>You can find my project on it&#8217;s GitHub page for <a title="Minify and LessCSS/LessPHP integration" rel="external nofollow" href="https://github.com/Ocramius/MinifyLessCSS">LessCSS and Minify Integration</a>.<br />
+If you&#8217;re familiar with Minify, just go on, download the package, change your config.php settings and try it out!<br />
+You just need to include .less files instead of .css ones in your requests/groupsConfig!</p>
+<h2>Setting up Minify with LessCSS support</h2>
+<p>If you&#8217;re not familiar with the project, here&#8217;s a very fast introduction:</p>
+<ol>
+<li><a title="Download Minify LessCSS LessPHP integration" rel="external nofollow" href="https://github.com/Ocramius/MinifyLessCSS/zipball/master" target="_blank">Download the current GitHub Repository Contents for the LessCSS LessPHP Minify</a> integration</li>
+<li>Unzip the file to a directory of your website/local web server</li>
+<li>Locate a file called &#8220;config.php&#8221; in the &#8220;min&#8221; directory and open it with your favourite text editor.</li>
+<li>Find a line that states (should be at line 57, like you see it <a rel="external nofollow" href="https://github.com/Ocramius/MinifyLessCSS/blob/master/min/config.php#L57" target="_blank">here</a>)
+<pre class="brush: php">    $min_documentRoot = '';</pre>
+<p>and change it with</p>
+<pre class="brush: php">    $min_documentRoot = dirname(__FILE__);</pre>
+</li>
+<li>Put some &#8220;.less&#8221; files in the &#8220;min&#8221; directory, like the following (I&#8217;m calling it &#8220;test.less&#8221;):
+<pre class="brush: css">@color: #4D926F;
+
+#header {
+  color: @color;
+}
+h2 {
+  color: @color;
+}</pre>
+</li>
+<li>Load the webpage at http://<span style="color: #ff0000;">yoursite</span>/<span style="color: #339966;">path/to/min</span>/?f=test.less, you should get an output similar to:
+<pre class="brush: css">#header{color:#4d926f}h2{color:#4d926f}</pre>
+</li>
+<li>Go to the <a title="Minify JS documentation" rel="external nofollow" href="http://code.google.com/p/minify/w/list" target="_blank">Minify Documentation</a> site and continue experimenting!</li>
+</ol>
+<p style="text-align: center;"><strong>After all, this is Minify&#8230; More or LESS <img src="../wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></strong></p>
+											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="../category/it/design/css/index.html" rel="category tag">CSS</a>, <a href="../category/it/design/index.html" rel="category tag">Design</a>, <a href="../category/it/development/index.html" rel="category tag">Development</a>, <a href="../category/it/index.html" rel="category tag">IT</a>, <a href="../category/it/design/css/less-css/index.html" rel="category tag">LESS CSS</a>, <a href="../category/it/development/programming/php/index.html" rel="category tag">PHP</a>, <a href="../category/startups-projects/index.html" rel="category tag">Startup Projects</a> and tagged <a href="../tag/css-2/index.html" rel="tag">css</a>, <a href="../tag/lesscss/index.html" rel="tag">lesscss</a>, <a href="../tag/minify/index.html" rel="tag">minify</a>, <a href="../tag/php-2/index.html" rel="tag">php</a>. Bookmark the <a href="index.html" title="Permalink to LessPHP Minify Integration for faster LessCSS development" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="../google-releases-new-webmaster-tools-features-seo-tools-for-better-serp-results/index.html" rel="prev"><span class="meta-nav">&larr;</span> Google Releases new Webmaster Tools Features!</a></div>
+					<div class="nav-next"><a href="../php-exploit-mysql-backdoor-with-load-data-local-infile/index.html" rel="next">PHP Security Exploit: MySQL as a Backdoor with Load Data Local Infile <span class="meta-nav">&rarr;</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">36 Responses to <em>LessPHP Minify Integration for faster LessCSS development</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-8">
+		<div id="comment-8">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/9156fe3f729f29c07be9fc861ac08d93?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/9156fe3f729f29c07be9fc861ac08d93?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">brian</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-8">
+			June 18, 2011 at 02:58</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hello,  I keep trying to link a file like so:<br />
+<code></p>
+<p></code><br />
+If I go to the url directly, I see the compiled and minified css, but if I link it like the above, the browser won&#8217;t use it as css.<br />
+If I change &#8220;main.less&#8221; to &#8220;main.css&#8221; (a regular css file, not LESS) in the same directory, it will minify it, and the browser will interpret the contents as css.</p>
+<p>Do you have any ideas?  Thanks.</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index94a5.html?replytocom=8#respond' onclick='return addComment.moveForm( "comment-8", "8", "respond", "79" )' aria-label='Reply to brian'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor odd alt depth-2" id="li-comment-9">
+		<div id="comment-9">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-9">
+			June 20, 2011 at 01:46</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>What browser are you using? Is the response served correctly? I mean: do you get the correct CSS output from your LESS files? What response headers do you have in the request? Because I currently think it&#8217;s related with the content-type header, which is currently set to text/less&#8230;</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexfc06.html?replytocom=9#respond' onclick='return addComment.moveForm( "comment-9", "9", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-29">
+		<div id="comment-29">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-29">
+			September 8, 2011 at 08:04</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Marco,<br />
+it&#8217;s just what I was looking for.</p>
+<p>just one question: I&#8217;d like to put .less files in a separated folder<br />
+(e.g., folders &#8220;styles&#8221; and &#8220;min&#8221; are both in the root of the site).<br />
+i tried the <code>$min_documentRoot = substr(__FILE__, 0, -15);</code><br />
+as explained  in the minify doc, but this is not workingin with the LESS integration (if I use your variation <code>$min_documentRoot = dirname(__FILE__);</code> it works but it needs to be inside the &#8220;min&#8221; folder).</p>
+<p>Is it possible to put the .less file outside the &#8220;min&#8221; dir?</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index06b6.html?replytocom=29#respond' onclick='return addComment.moveForm( "comment-29", "29", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor odd alt depth-2" id="li-comment-30">
+		<div id="comment-30">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-30">
+			September 8, 2011 at 08:09</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Daniele!<br />
+I suggest you to keep the $min_documentRoot and use the groupsConfig.php, where you can use any path you like (and realpaths) to tell minify what to include&#8230;<br />
+That should work fine as in my projects JS files are not directly accessible within the documentRoot, and are parsed by the closures compiler before being served (obviously caching them before!).</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index7c98.html?replytocom=30#respond' onclick='return addComment.moveForm( "comment-30", "30", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-31">
+		<div id="comment-31">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-31">
+			September 8, 2011 at 09:11</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>in this way?<br />
+<code> '/style/test.less',<br />
+	'contentType' =&gt; "text/css"<br />
+));</p>
+<p>return array(<br />
+    'style' =&gt; array($src1)<br />
+);<br />
+</code></p>
+<p>(calling it with <code></code> from my HTML? i cannot understand why, but it gives me a blank page.)</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexec27.html?replytocom=31#respond' onclick='return addComment.moveForm( "comment-31", "31", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-32">
+		<div id="comment-32">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-32">
+			September 8, 2011 at 09:12</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>sorry, my code in the groupsConfig is:<br />
+<code><br />
+$src1 = new Minify_Source(array(<br />
+	'filepath' =&gt; '/style/test.less',<br />
+	'contentType' =&gt; "text/css"<br />
+));</p>
+<p>return array(<br />
+    'style' =&gt; array($src1)<br />
+);<br />
+</code></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexdefb.html?replytocom=32#respond' onclick='return addComment.moveForm( "comment-32", "32", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-33">
+		<div id="comment-33">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-33">
+			September 8, 2011 at 09:21</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Well, your groupsConfig.php looks fine, but you probably won&#8217;t use &#8216;/style/test.less&#8217; as you probably don&#8217;t have a &#8216;style&#8217; directory at the root of your site.<br />
+Consider using relative paths, like:<br />
+<code><br />
+    'filepath' =&gt; dirname(__FILE__) . '/../../styles/test.less'<br />
+</code></p>
+<p>When you call it, you usually use &#8216;min/?g=style&#8217; as the URL&#8230;</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index6d69.html?replytocom=33#respond' onclick='return addComment.moveForm( "comment-33", "33", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-34">
+		<div id="comment-34">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-34">
+			September 8, 2011 at 12:17</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>You are right, what a stupid mistake, I am not in root but in a subfolder.</p>
+<p>but now:</p>
+<p>(with config.php <code>$min_documentRoot = dirname(__FILE__);</code>)</p>
+<p>groupsConfig.php:<br />
+<code><br />
+$src1 = new Minify_Source(array(<br />
+'filepath' =&gt; dirname(__FILE__) . '/../style/test.less',<br />
+'contentType' =&gt; "text/css"<br />
+));</p>
+<p>return array(<br />
+'style' =&gt; array($src1)<br />
+);</code></p>
+<p>the output is <code>@color: #4D926F;body{background: @color}h2{color: @color}</code> so LESS compiler is not working (but if the .less file file is inside the &#8220;min&#8221; folder, the output is right: <code>body{background: #4D926F}h2{color: #4D926F}</code>)</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index3d09.html?replytocom=34#respond' onclick='return addComment.moveForm( "comment-34", "34", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-35">
+		<div id="comment-35">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-35">
+			September 8, 2011 at 12:19</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Could you omit the content-type? <img src="../wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /> I suppose that&#8217;s the same issue of before&#8230;</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index61aa.html?replytocom=35#respond' onclick='return addComment.moveForm( "comment-35", "35", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-36">
+		<div id="comment-36">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-36">
+			September 8, 2011 at 12:30</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Holy shit, it works!<br />
+I suppose I can say:<b>grassie vecio!!!</b> 😉</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index2636.html?replytocom=36#respond' onclick='return addComment.moveForm( "comment-36", "36", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-37">
+		<div id="comment-37">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-37">
+			September 8, 2011 at 12:32</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>No need for such formalities 😀</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexc916.html?replytocom=37#respond' onclick='return addComment.moveForm( "comment-37", "37", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-38">
+		<div id="comment-38">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-38">
+			September 8, 2011 at 18:04</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>wait..<br />
+I checked the code, in my index.php I am calling<br />
+<code></code></p>
+<p>with the <code>'contentType' =&gt; "text/css"</code> option (in groupsConfig.php) it does not compile the less code, so the output is:<br />
+<code>@color: #4D926F;body{background: @color}h2{color: @color}</code></p>
+<p>but if I omit the content type, output is right (<code>body{background:#4d926f}h2{color:#4d926f}</code>)<br />
+but inspect element gives the message:<br />
+<i>Resource interpreted as stylesheet but transferred with MIME type text/less</i></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexb901.html?replytocom=38#respond' onclick='return addComment.moveForm( "comment-38", "38", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-39">
+		<div id="comment-39">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-39">
+			September 8, 2011 at 18:33</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>(and the css file is not parsed)</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexbed3.html?replytocom=39#respond' onclick='return addComment.moveForm( "comment-39", "39", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor odd alt depth-2" id="li-comment-40">
+		<div id="comment-40">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-40">
+			September 9, 2011 at 03:23</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>enforce<br />
+<strong><code>link type="text/css"</code></strong><br />
+ within your html and it should run&#8230; This is a known issue I wasn&#8217;t able to address because of the tight coupling of components within minify&#8230;</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index5cd6.html?replytocom=40#respond' onclick='return addComment.moveForm( "comment-40", "40", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-41">
+		<div id="comment-41">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-41">
+			September 9, 2011 at 06:26</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p> continues to give Resource interpreted as stylesheet but transferred with MIME type text/less</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index5785.html?replytocom=41#respond' onclick='return addComment.moveForm( "comment-41", "41", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor odd alt depth-2" id="li-comment-42">
+		<div id="comment-42">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-42">
+			September 9, 2011 at 07:22</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>As I said, that&#8217;s an issue I couldn&#8217;t address&#8230; Does the browser refuse to interpret them as css? Is that a notice, a warning or a critical?<br />
+Really sorry for that&#8230;<br />
+Please check <a href="https://github.com/Ocramius/MinifyLessCSS/issues/1" rel="nofollow">The issue on Github</a> and also let me know about the details of your problem.<br />
+I&#8217;ll try to fix it as soon as possible (or you could do a pull request), but I&#8217;m quite busy this weekend and the coming week, so don&#8217;t expect me to do that in this time lapse <img src="../wp-includes/images/smilies/frownie.png" alt=":(" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index0a88.html?replytocom=42#respond' onclick='return addComment.moveForm( "comment-42", "42", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-43">
+		<div id="comment-43">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-43">
+			September 9, 2011 at 09:05</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>maybe an advice <img src="../wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>I think it&#8217;s a warning (it&#8217;s highlighted in orange inside inspect element)<br />
+when it&#8217;s an error it&#8217;s highlighted in red.</p>
+<p>but the file is ignored (my body is not #4D926F)</p>
+<p>I&#8217;ll check the issue, thanks in advance for your time</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexf73b.html?replytocom=43#respond' onclick='return addComment.moveForm( "comment-43", "43", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-44">
+		<div id="comment-44">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-44">
+			September 13, 2011 at 13:18</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>ok i tried modifying the Minify Source but the resulting file is not converted from less to css in this way.</p>
+<p>any help will be appreciated, thanks</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index39ab.html?replytocom=44#respond' onclick='return addComment.moveForm( "comment-44", "44", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-45">
+		<div id="comment-45">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-45">
+			September 13, 2011 at 17:09</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>A solution could be applying a LESS filter on every CSS file parsed by minify, but I don&#8217;t really know if that&#8217;s a good solution&#8230;</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index9e16.html?replytocom=45#respond' onclick='return addComment.moveForm( "comment-45", "45", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-49">
+		<div id="comment-49">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/00087307126f87020b70ac1dda3423a2?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">daniele</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-49">
+			October 3, 2011 at 09:34</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>hi, did you find a more robust solution for the issue?</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index21e4.html?replytocom=49#respond' onclick='return addComment.moveForm( "comment-49", "49", "respond", "79" )' aria-label='Reply to daniele'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-50">
+		<div id="comment-50">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-50">
+			October 3, 2011 at 14:22</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Daniele,<br />
+I&#8217;m sorry, but I really didn&#8217;t have any time to work on this issue (have been only working and working since I moved to Frankfurt <img src="../wp-includes/images/smilies/frownie.png" alt=":(" class="wp-smiley" style="height: 1em; max-height: 1em;" /> )<br />
+The only &#8220;fast&#8221; solution I can recall is applying the less filter on any css passed to minify, but it&#8217;s not that clean&#8230;</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexed49.html?replytocom=50#respond' onclick='return addComment.moveForm( "comment-50", "50", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-64">
+		<div id="comment-64">
+		<div class="comment-author vcard">
+			<img alt='' src='http://2.gravatar.com/avatar/e1627d118ee5c87c2349a82d7b5be26c?s=40&amp;d=mm&amp;r=g' srcset='http://2.gravatar.com/avatar/e1627d118ee5c87c2349a82d7b5be26c?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='http://jesserosenfield.com/' rel='external nofollow' class='url'>JR</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-64">
+			October 16, 2011 at 16:30</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>First of all thanks for all your work&#8211; this is the perfect step in the right direction for the automatic deployment of .less files!</p>
+<p>It looks like you&#8217;ve established this already, but this doesn&#8217;t work : I still need to to use less.js for the combined less file to render as css, and additionally the format for media queries gets messed up and does not work at all. </p>
+<p>Please continue working on this as it will help immensly when you get it working. Thank you!</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexa2b6.html?replytocom=64#respond' onclick='return addComment.moveForm( "comment-64", "64", "respond", "79" )' aria-label='Reply to JR'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-68">
+		<div id="comment-68">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-68">
+			November 3, 2011 at 10:12</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I&#8217;m trying to get some free time to do that, but I&#8217;m currently involved in a more important Zend Framework 2 &#8211; Doctrine 2 integration tool and lots of work that produces money <img src="../wp-includes/images/smilies/frownie.png" alt=":(" class="wp-smiley" style="height: 1em; max-height: 1em;" /><br />
+Sorry for that, but I&#8217;d love someone to comment the code on GitHub at <a href="https://github.com/Ocramius/MinifyLessCSS" rel="nofollow">https://github.com/Ocramius/MinifyLessCSS</a> , it would help a lot <img src="../wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexa129.html?replytocom=68#respond' onclick='return addComment.moveForm( "comment-68", "68", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment odd alt depth-3" id="li-comment-162">
+		<div id="comment-162">
+		<div class="comment-author vcard">
+			<img alt='' src='http://2.gravatar.com/avatar/89dac562044ed81c70f88d269fb21c16?s=40&amp;d=mm&amp;r=g' srcset='http://2.gravatar.com/avatar/89dac562044ed81c70f88d269fb21c16?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Emil Edeholt</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-162">
+			January 25, 2012 at 14:56</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I&#8217;m not sure if this fixes the problem for everyone in every browser, but simply replacing the header() call at line 314 in min/lib/Minify.php like this fixed it for me:</p>
+<p><code><br />
+if($name == "Content-Type" &amp;&amp; stristr($val, "text/less")) {<br />
+   header($name . ': ' . "text/css");<br />
+} else {<br />
+   header($name . ': ' . $val);<br />
+}<br />
+</code></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexfeb7.html?replytocom=162#respond' onclick='return addComment.moveForm( "comment-162", "162", "respond", "79" )' aria-label='Reply to Emil Edeholt'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-4" id="li-comment-163">
+		<div id="comment-163">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-163">
+			January 25, 2012 at 15:55</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Could you do a PR on the repo? This is hacky, but as this isn&#8217;t being developed but just maintained then a hacky change can work 😉</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexcdf6.html?replytocom=163#respond' onclick='return addComment.moveForm( "comment-163", "163", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-67">
+		<div id="comment-67">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/d323dab92dbc30b354d59bd9327713af?s=40&amp;d=mm&amp;r=g' srcset='http://1.gravatar.com/avatar/d323dab92dbc30b354d59bd9327713af?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='http://www.jenssage.com/' rel='external nofollow' class='url'>Jens Sage</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-67">
+			November 3, 2011 at 09:56</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Good! But you may want to use a simple caching algorithm</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index5602.html?replytocom=67#respond' onclick='return addComment.moveForm( "comment-67", "67", "respond", "79" )' aria-label='Reply to Jens Sage'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-69">
+		<div id="comment-69">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-69">
+			November 3, 2011 at 10:12</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Caching algorithm is already provided by the Minify code base&#8230;</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexfdcf.html?replytocom=69#respond' onclick='return addComment.moveForm( "comment-69", "69", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-159">
+		<div id="comment-159">
+		<div class="comment-author vcard">
+			<img alt='' src='http://2.gravatar.com/avatar/b02fa6d43eee3fb0e82200d2cd42a9f1?s=40&amp;d=mm&amp;r=g' srcset='http://2.gravatar.com/avatar/b02fa6d43eee3fb0e82200d2cd42a9f1?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='http://devdef.net/' rel='external nofollow' class='url'>Ralph Leo Bennett (DeviateDefiant)</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-159">
+			December 20, 2011 at 10:56</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks for the tutorial and your work, very useful. I hope I can streamline integration with my usual CMS.</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexd732.html?replytocom=159#respond' onclick='return addComment.moveForm( "comment-159", "159", "respond", "79" )' aria-label='Reply to Ralph Leo Bennett (DeviateDefiant)'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-160">
+		<div id="comment-160">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-160">
+			December 20, 2011 at 11:03</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I decided to stop working on this Minify LESS CSS integration as I&#8217;m really busy working on Zend Framework 2, Doctrine 2 and Assetic (which is a PHP 5.3 minify killer) and studying/making slides for my company&#8230; Even in my free time. Sorry&#8230;<br />
+As said, the repository is still on github and I&#8217;ll be pleased to accept any pull requests from anyone <img src="../wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexeb13.html?replytocom=160#respond' onclick='return addComment.moveForm( "comment-160", "160", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-166">
+		<div id="comment-166">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/441bcfc24dc179788f10530a6e74eed9?s=40&amp;d=mm&amp;r=g' srcset='http://1.gravatar.com/avatar/441bcfc24dc179788f10530a6e74eed9?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">Robert</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-166">
+			February 5, 2012 at 16:49</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Marco,<br />
+Very good work. Just wanted to ask if you recommend using this code for commercial projects (my clients) or for personal projects only? Thanks.</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index74ab.html?replytocom=166#respond' onclick='return addComment.moveForm( "comment-166", "166", "respond", "79" )' aria-label='Reply to Robert'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-167">
+		<div id="comment-167">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-167">
+			February 5, 2012 at 19:15</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Robert,<br />
+I wouldn&#8217;t suggest to use this for commercial projects as it comes shipped with no unit tests and is actually a hack for minify.<br />
+If you need to support commercial projects which need some stability, I&#8217;d consider using <a href="https://github.com/kriswallsmith/assetic" title="Assetic" target="_blank" rel="tag" rel="nofollow">Assetic</a>, which is tested and works like a charm in my Zend Framework 2 modules <img src="../wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexd28e.html?replytocom=167#respond' onclick='return addComment.moveForm( "comment-167", "167", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-182">
+		<div id="comment-182">
+		<div class="comment-author vcard">
+			<img alt='' src='http://2.gravatar.com/avatar/816f969b7331813049b512a5bdfbac5b?s=40&amp;d=mm&amp;r=g' srcset='http://2.gravatar.com/avatar/816f969b7331813049b512a5bdfbac5b?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">sören martius</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-182">
+			August 6, 2012 at 10:12</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Marco,</p>
+<p>Less is a good thing but have you seen sass yet? it comes with more features then less..check out this post: <a href="http://css-tricks.com/sass-vs-less/" rel="nofollow">http://css-tricks.com/sass-vs-less/</a></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexcc4b.html?replytocom=182#respond' onclick='return addComment.moveForm( "comment-182", "182", "respond", "79" )' aria-label='Reply to sören martius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor even depth-2" id="li-comment-183">
+		<div id="comment-183">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-183">
+			August 6, 2012 at 10:40</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I am out of the &#8220;SASS vs LESS&#8221; discussion, since if it was me, we&#8217;d still be using &lt;table/&gt; everywhere.</p>
+<p>I&#8217;m a software engineer, not a designer 😉</p>
+<p>Anyway, I supporting this project since <a href="https://github.com/kriswallsmith/assetic" title="Assetic" target="_blank" rel="nofollow">Assetic</a> is much much better and fits better to my needs.</p>
+<p>SASS is already supported in Assetic if you want to use it!</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index71ae.html?replytocom=183#respond' onclick='return addComment.moveForm( "comment-183", "183", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-184">
+		<div id="comment-184">
+		<div class="comment-author vcard">
+			<img alt='' src='http://2.gravatar.com/avatar/816f969b7331813049b512a5bdfbac5b?s=40&amp;d=mm&amp;r=g' srcset='http://2.gravatar.com/avatar/816f969b7331813049b512a5bdfbac5b?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">sören martius</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-184">
+			August 7, 2012 at 08:08</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Marco,</p>
+<p>i agree &#8211; i am also an developer but in my opinion sass with compass has some advantages &#8211; i am using sass/compass with assetic and it works great <img src="../wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexa3d0.html?replytocom=184#respond' onclick='return addComment.moveForm( "comment-184", "184", "respond", "79" )' aria-label='Reply to sören martius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-552">
+		<div id="comment-552">
+		<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/a819a2d26c0c34b3fddeb70e3d626224?s=40&amp;d=mm&amp;r=g' srcset='http://1.gravatar.com/avatar/a819a2d26c0c34b3fddeb70e3d626224?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn">ESW</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-552">
+			February 4, 2014 at 17:38</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Or, you could have just done the following with LessPHP: $less-&gt;setFormatter(&#8220;compressed&#8221;);</p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='index3a51.html?replytocom=552#respond' onclick='return addComment.moveForm( "comment-552", "552", "respond", "79" )' aria-label='Reply to ESW'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-ocramius bypostauthor odd alt depth-2" id="li-comment-595">
+		<div id="comment-595">
+		<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=40&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/3cf7a8ab0bccee5b65d39b50a170a555?s=80&amp;d=mm&amp;r=g 2x' class='avatar avatar-40 photo' height='40' width='40' />			<cite class="fn"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="index.html#comment-595">
+			January 15, 2015 at 20:27</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Yeah, well&#8230; That didn&#8217;t exist at the time I wrote this thing <img src="../wp-includes/images/smilies/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='indexa0b7.html?replytocom=595#respond' onclick='return addComment.moveForm( "comment-595", "595", "respond", "79" )' aria-label='Reply to ocramius'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+			</ol>
+
+
+
+						<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply to <a href="#comment-67">Jens Sage</a> <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond">Cancel reply</a></small></h3>
+									<form action="http://marco-pivetta.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																			<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p>						<p class="form-allowed-tags" id="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code></p>
+						<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='79' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='67' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="962e7142a2" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="121"/></p>					</form>
+							</div><!-- #respond -->
+			
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></span> on <a href="index.html#comment-595">LessPHP Minify Integration for faster LessCSS development</a></li><li class="recentcomments"><span class="comment-author-link">ESW</span> on <a href="index.html#comment-552">LessPHP Minify Integration for faster LessCSS development</a></li><li class="recentcomments"><span class="comment-author-link">sören martius</span> on <a href="index.html#comment-184">LessPHP Minify Integration for faster LessCSS development</a></li><li class="recentcomments"><span class="comment-author-link"><a href='../index.html' rel='external nofollow' class='url'>ocramius</a></span> on <a href="index.html#comment-183">LessPHP Minify Integration for faster LessCSS development</a></li><li class="recentcomments"><span class="comment-author-link">sören martius</span> on <a href="index.html#comment-182">LessPHP Minify Integration for faster LessCSS development</a></li></ul></li><li id="twitter-1" class="widget-container widget_twitter"><h3 class="widget-title"><a href="http://twitter.com/Ocramius" class="twitter_title_link">Last Tweets</a></h3><ul class="twitter"><li>No public Twitter messages.</li></ul></li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-43"><a href="../category/github/index.html" >github</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="../category/it/index.html" >IT</a>
+<ul class='children'>
+	<li class="cat-item cat-item-31"><a href="../category/it/design/index.html" >Design</a>
+	<ul class='children'>
+	<li class="cat-item cat-item-32"><a href="../category/it/design/css/index.html" >CSS</a>
+		<ul class='children'>
+	<li class="cat-item cat-item-33"><a href="../category/it/design/css/less-css/index.html" >LESS CSS</a>
+</li>
+		</ul>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-10"><a href="../category/it/development/index.html" >Development</a>
+	<ul class='children'>
+	<li class="cat-item cat-item-11"><a href="../category/it/development/dba/index.html" title="Database Administration DBA">DBA</a>
+		<ul class='children'>
+	<li class="cat-item cat-item-12"><a href="../category/it/development/dba/mysql/index.html" >MySQL</a>
+</li>
+		</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="../category/it/development/programming/index.html" >Programming</a>
+		<ul class='children'>
+	<li class="cat-item cat-item-25"><a href="../category/it/development/programming/php/index.html" >PHP</a>
+			<ul class='children'>
+	<li class="cat-item cat-item-29"><a href="../category/it/development/programming/php/5-3/index.html" >5.3</a>
+</li>
+	<li class="cat-item cat-item-38"><a href="../category/it/development/programming/php/exploits/index.html" >Exploits</a>
+</li>
+			</ul>
+</li>
+		</ul>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-16"><a href="../category/it/search-engines/index.html" >Search Engines</a>
+	<ul class='children'>
+	<li class="cat-item cat-item-17"><a href="../category/it/search-engines/seo/index.html" >SEO</a>
+		<ul class='children'>
+	<li class="cat-item cat-item-18"><a href="../category/it/search-engines/seo/google/index.html" >Google</a>
+</li>
+		</ul>
+</li>
+	</ul>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-3"><a href="../category/startups-projects/index.html" title="A list of news about starting projects">Startup Projects</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="../category/tricks/index.html" >Tricks</a>
+</li>
+		</ul>
+</li><li id="linkcat-2" class="widget-container widget_links"><h3 class="widget-title">Blogroll</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://emanueleminotto.wordpress.com/" rel="friend" title="Just another Web Developer&#8217;s Blog" target="_blank">Emanuele Minotto</a>
+Just another Web Developer&#8217;s Blog</li>
+<li><a href="http://www.focustheweb.com/" rel="friend met" title="Music, Web Design and Ideas" target="_blank">Focus the Web</a>
+Music, Web Design and Ideas</li>
+<li><a href="http://innobrainz.wordpress.com/" rel="friend co-worker" target="_blank">InnoBrainz</a></li>
+<li><a href="../cv.html" rel="me" title="My Web Development resume">Resume</a>
+My Web Development resume</li>
+
+	</ul>
+</li>
+			</ul>
+		</div><!-- #primary .widget-area -->
+
+
+		<div id="secondary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+				<li id="text-3" class="widget-container widget_text">			<div class="textwidget"><a href="https://affiliates.mozilla.org/link/banner/1273/4/156" rel="external nofollow"><img src="http://affiliates-cdn.mozilla.org/media/uploads/banners/build-better-web-tall-red-EN.png" alt="Web Developer for Mozilla Firefox" border="0" /></a></div>
+		</li>			</ul>
+		</div><!-- #secondary .widget-area -->
+
+	</div>
+</div>
+<div id="footer" role="contentinfo">
+	<div id="colophon">
+
+	<address class="vcard">
+		<span class="adr">
+				<a href="../index.html" title="Yet Another Angry Web Developer" class="fn url" rel="home">Marco Pivetta</a>
+				@<a class="nickname url" href="http://twitter.com/Ocramius" target="_blank" rel="nofollow">Ocramius</a>
+				<span class="street-address">Bornstrasse 3</span>
+				<span class="zip">61250</span>
+				<span class="locality">Usingen</span>
+				<span class="region">Hessen</abbr>,
+				<span class="country">Germany</span>
+		</span>
+		<a class="email" href="mailto:ocramius@gmail.com">ocramius@gmail.com</a>
+	</address>
+	<?php/*	<div id="site-info">
+			<a href="../index.html" title="Yet Another Angry Web Developer" rel="home">
+				Yet Another Angry Web Developer			</a>
+		</div><!-- #site-info -->
+
+		<div id="site-generator">
+						<a href="http://wordpress.org/"
+					title="Semantic Personal Publishing Platform" rel="generator">
+				Proudly powered by WordPress.			</a>
+		</div><!-- #site-generator -->
+
+	</div><!-- #colophon -->
+	*/?>
+</div>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><script type='text/javascript' src='../wp-content/plugins/akismet/_inc/formc6bd.js?ver=3.1.5'></script>
+<script type='text/javascript' src='../wp-includes/js/comment-reply.mind19b.js?ver=4.2.5'></script>
+</body>
+
+<!-- Mirrored from marco-pivetta.com/lessphp-minify-integration-lesscss-development/?replytocom=67 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 27 Oct 2015 07:39:29 GMT -->
+</html>

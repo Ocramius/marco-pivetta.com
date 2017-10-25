@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Yet Another Angry Web Developer &#187; css</title>
+	<atom:link href="http://marco-pivetta.com/tag/css-2/feed/" rel="self" type="application/rss+xml" />
+	<link>http://marco-pivetta.com</link>
+	<description>Web Development as seen by a Web Developer</description>
+	<lastBuildDate>Thu, 16 May 2013 20:30:39 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.5</generator>
+	<item>
+		<title>LessPHP Minify Integration for faster LessCSS development</title>
+		<link>http://marco-pivetta.com/lessphp-minify-integration-lesscss-development/</link>
+		<comments>http://marco-pivetta.com/lessphp-minify-integration-lesscss-development/#comments</comments>
+		<pubDate>Sat, 28 May 2011 00:28:37 +0000</pubDate>
+		<dc:creator><![CDATA[ocramius]]></dc:creator>
+				<category><![CDATA[CSS]]></category>
+		<category><![CDATA[Design]]></category>
+		<category><![CDATA[Development]]></category>
+		<category><![CDATA[IT]]></category>
+		<category><![CDATA[LESS CSS]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Startup Projects]]></category>
+		<category><![CDATA[css]]></category>
+		<category><![CDATA[lesscss]]></category>
+		<category><![CDATA[minify]]></category>
+		<category><![CDATA[php]]></category>
+
+		<guid isPermaLink="false">http://marco-pivetta.com/?p=79</guid>
+		<description><![CDATA[Today I&#8217;ve been working on some addition to the Minify Project to support LESS CSS integration throug LessPHP. Why do I need LESS CSS? As you probably have noticed, your CSS files are becoming huge, especially when working on great &#8230; <a href="http://marco-pivetta.com/lessphp-minify-integration-lesscss-development/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>Today I&#8217;ve been working on some addition to the <strong><a title="Minify Project on Google Code" rel="external nofollow" href="http://code.google.com/p/minify/" target="_blank">Minify Project</a></strong> to support <strong><a title="LESS CSS for faster CSS development" rel="external nofollow" href="http://lesscss.org/" target="_blank">LESS CSS </a></strong>integration throug <a title="LessPHP by Leafo" rel="external nofollow" href="http://leafo.net/lessphp/" target="_blank">LessPHP</a>.</p>
+<h2>Why do I need LESS CSS?</h2>
+<p>As you probably have noticed, your <strong>CSS files are becoming huge</strong>, especially when working on great projects, avoiding sprites, adding gradients, box-shadows, animations, keyframes, etc:</p>
+<p style="padding-left: 30px;">That&#8217;s where LESS CSS comes into play.<br />
+<strong>LESS CSS is</strong> just another way of writing CSS, <strong><span style="text-decoration: underline;">not</span></strong> that <strong><span style="text-decoration: underline;">repetitive</span></strong> and &#8220;LESS&#8221; confusing in big projects.</p>
+<p><span id="more-79"></span></p>
+<h2>Why do I need Minify?</h2>
+<p><strong>Minify</strong> is a <strong>great tool</strong> for CSS compression <strong>on complex design projects</strong>, where you have more designers and dozens of different widgets to be styled individually, but without making the website slow and unresponsive, <strong>keeping it fast</strong> and slick.</p>
+<h2>So what was missing?</h2>
+<p>I&#8217;ve been working with Minify JS and CSS for some years till now, but once I switched to LESS I decided to<strong> stop writing</strong> all my <strong>CSS by hand</strong>.<br />
+<strong>Repeating css rules</strong> and all those<strong> vendor-prefixes</strong> for properties made me mad<strong>!</strong> This brought me to the usage of the <strong><a title="LESS CSS for Mac OSX" rel="external nofollow" href="http://incident57.com/less/" target="_blank">Less App for Mac OS</a></strong>, but also forced me to repeat a painful <strong>compile/redeploy procedure</strong> every time, most of the times automated with complex scripts that made the procedure even more <strong>confusing for my design team</strong>.</p>
+<p><strong>Minify</strong> was <strong>not able to</strong> pack and <strong>manage my LESS </strong>CSS files.</p>
+<p>&nbsp;</p>
+<h2>So what does this Minify LessPHP/LessCSS integration do?</h2>
+<p>I didn&#8217;t even believe I could make it in such a short time, just a bit of planning an an hour of coding+debugging, but now I have a working <strong>Minify</strong> instance<strong> using &#8220;.less&#8221; files and automagically </strong>compiling through LessPHP and <strong>minifying them</strong>.</p>
+<p>You can find my project on it&#8217;s GitHub page for <a title="Minify and LessCSS/LessPHP integration" rel="external nofollow" href="https://github.com/Ocramius/MinifyLessCSS">LessCSS and Minify Integration</a>.<br />
+If you&#8217;re familiar with Minify, just go on, download the package, change your config.php settings and try it out!<br />
+You just need to include .less files instead of .css ones in your requests/groupsConfig!</p>
+<h2>Setting up Minify with LessCSS support</h2>
+<p>If you&#8217;re not familiar with the project, here&#8217;s a very fast introduction:</p>
+<ol>
+<li><a title="Download Minify LessCSS LessPHP integration" rel="external nofollow" href="https://github.com/Ocramius/MinifyLessCSS/zipball/master" target="_blank">Download the current GitHub Repository Contents for the LessCSS LessPHP Minify</a> integration</li>
+<li>Unzip the file to a directory of your website/local web server</li>
+<li>Locate a file called &#8220;config.php&#8221; in the &#8220;min&#8221; directory and open it with your favourite text editor.</li>
+<li>Find a line that states (should be at line 57, like you see it <a rel="external nofollow" href="https://github.com/Ocramius/MinifyLessCSS/blob/master/min/config.php#L57" target="_blank">here</a>)
+<pre class="brush: php">    $min_documentRoot = '';</pre>
+<p>and change it with</p>
+<pre class="brush: php">    $min_documentRoot = dirname(__FILE__);</pre>
+</li>
+<li>Put some &#8220;.less&#8221; files in the &#8220;min&#8221; directory, like the following (I&#8217;m calling it &#8220;test.less&#8221;):
+<pre class="brush: css">@color: #4D926F;
+
+#header {
+  color: @color;
+}
+h2 {
+  color: @color;
+}</pre>
+</li>
+<li>Load the webpage at http://<span style="color: #ff0000;">yoursite</span>/<span style="color: #339966;">path/to/min</span>/?f=test.less, you should get an output similar to:
+<pre class="brush: css">#header{color:#4d926f}h2{color:#4d926f}</pre>
+</li>
+<li>Go to the <a title="Minify JS documentation" rel="external nofollow" href="http://code.google.com/p/minify/w/list" target="_blank">Minify Documentation</a> site and continue experimenting!</li>
+</ol>
+<p style="text-align: center;"><strong>After all, this is Minify&#8230; More or LESS <img src="http://marco-pivetta.com/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></strong></p>
+]]></content:encoded>
+			<wfw:commentRss>http://marco-pivetta.com/lessphp-minify-integration-lesscss-development/feed/</wfw:commentRss>
+		<slash:comments>36</slash:comments>
+		</item>
+	</channel>
+</rss>

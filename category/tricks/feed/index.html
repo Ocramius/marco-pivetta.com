@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Yet Another Angry Web Developer &#187; Tricks</title>
+	<atom:link href="http://marco-pivetta.com/category/tricks/feed/" rel="self" type="application/rss+xml" />
+	<link>http://marco-pivetta.com</link>
+	<description>Web Development as seen by a Web Developer</description>
+	<lastBuildDate>Thu, 16 May 2013 20:30:39 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.5</generator>
+	<item>
+		<title>MySQL Custom Sorting Rules</title>
+		<link>http://marco-pivetta.com/mysql-custom-sorting-rule-mysql/</link>
+		<comments>http://marco-pivetta.com/mysql-custom-sorting-rule-mysql/#comments</comments>
+		<pubDate>Fri, 08 Oct 2010 11:12:39 +0000</pubDate>
+		<dc:creator><![CDATA[ocramius]]></dc:creator>
+				<category><![CDATA[DBA]]></category>
+		<category><![CDATA[Development]]></category>
+		<category><![CDATA[IT]]></category>
+		<category><![CDATA[MySQL]]></category>
+		<category><![CDATA[Tricks]]></category>
+		<category><![CDATA[Query]]></category>
+		<category><![CDATA[SQL]]></category>
+
+		<guid isPermaLink="false">http://marco-pivetta.com/?p=21</guid>
+		<description><![CDATA[How to sort data in MySQL with a custom sorting list... Easy! <a href="http://marco-pivetta.com/mysql-custom-sorting-rule-mysql/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>Today I was facing troubles with the administrative dept of the web agency where I&#8217;m working in&#8230; They wanted to have their receiptive structures sorted by a custom role&#8230;</p>
+<p>What I first thought about was a MySQL Union query where I had to fetch all distinct types of receiptive structures (Hotels, B&amp;Bs, Campings, etc&#8230;) in the desired order in different parametrized queries&#8230; Something like the following:</p>
+<pre class="brush: sql">(
+  SELECT
+    1 as sorting_column,
+    *
+  FROM receiptive_structures
+  WHERE type_id=4
+) AS a
+UNION ALL
+(
+  SELECT
+    2 as sorting_column,
+    *
+  FROM receiptive_structures
+  WHERE type_id=2
+) AS b
+UNION ALL
+(
+  SELECT
+    3 as sorting_column,
+    *
+  FROM receiptive_structures
+  WHERE type_id=7
+) AS c
+UNION ALL
+(
+  SELECT
+    4 as sorting_column,
+    *
+  FROM receiptive_structures
+  WHERE type_id=1
+) AS d
+ORDER BY sorting_column ASC</pre>
+<p>Althrough the &#8216;sorting_column&#8217; shouldn&#8217;t be necessary, I had too many bad experiences with mysql and its sorting features (expecially when merging together resultsets, like in this case).</p>
+<p>Nasty solution&#8230;<br />
+I decided to continue looking for a more elegant way of doing this&#8230;</p>
+<p>I decided to use some kind of on-the-fly generated function in the ORDER BY clause of my MySQL Custom Sorting Query:</p>
+<pre class="brush: sql">SELECT
+((type_id=4)*1
++(type_id=2)*2
++(type_id=7)*3
++(type_id=1)*4) AS sorting_column,
+r.*
+FROM receiptive_structures AS r
+ORDER BY sorting_column ASC</pre>
+<p>Still looks ugly&#8230;<br />
+Digging into the MySQL manual, found out that there&#8217;s a faster way of doing that!</p>
+<pre class="brush: sql">SELECT * FROM receiptive_structures
+ORDER BY FIELD(priority, 4,2,7,1);</pre>
+<p>And here&#8217;s a quick overview of the MySQL FIELD() &#8220;weight&#8221; function <img src="http://marco-pivetta.com/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<pre class="brush: sql">Database changed
+mysql> select id, FIELD(id,4,2,7,1) AS sorting
+    -> FROM l10n ORDER BY sorting DESC limit 5;
++----+---------+
+| id | sorting |
++----+---------+
+|  1 |       4 |
+|  7 |       3 |
+|  2 |       2 |
+|  4 |       1 |
+|  3 |       0 |
++----+---------+
+5 rows in set (0.00 sec)</pre>
+<p>I hope this will be useful for you <img src="http://marco-pivetta.com/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://marco-pivetta.com/mysql-custom-sorting-rule-mysql/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+	</channel>
+</rss>
